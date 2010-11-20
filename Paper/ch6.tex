@@ -1,0 +1,215 @@
+\chapter[Приложение к задаче пассификации]{Приложение к задаче синтеза пассифицирующей обратной связи}
+
+\section{Задача пассификации}
+
+Проблема пассифицирующей\footnote{Наряду с термином <<пассификация>>, часто используется термин <<пассивация>>.} обратной связи возникает при решении некоторых задач теории систем и теории автоматического управления, использующих в том или ином виде частотные и матричные неравенства, связываемые \emph{частотной теоремой}, также известной, как \emph{лемма Якубовича-Калмана}, которая звучит следующим образом:
+
+\begin{lemma}
+\label{lemma:5/1}
+Лемма Якубовича-Калмана.\br
+
+Пусть заданы число $\gamma > 0$, векторы $b \in \Rv{n}$, $c \in \Rv{n}$ и гурвицева матрица $A \in \Rv{n \times n}$. Пара $(A,b)$ будет полностью управляемой, тогда и только тогда, когда существуют такие вектор $q$ и симметричная матрица $P$, для которых справедливы условия
+
+\begin{eqnarray*}
+A^TP+PA = -qq^T\mbox{.} \\
+Pb-c = \sqrt{\gamma}q\mbox{.} \\
+\gamma + 2Re[ c^T (j\omega I - A)^{-1} b] \geqslant 0\mbox{.}
+\end{eqnarray*}
+
+\end{lemma}
+
+Разрешимость матричных неравенств, возникающих в лемме Яку\-бо\-ви\-ча-Калмана, эквивалентна разрешимости некоторых интегральных неравенств во временной области, соответствующих свойству типа диссипации. В частном случае, возникающем при синтезе адаптивных систем, разрешимость этих неравенств соответствует свойству пассивности системы, хорошо известному из теории электрических цепей. Метод пассификации~--- прием решения задач, заключающийся в отыскании такой обратной связи, который бы сделал систему \emph{пассивной}. Этод метод широко используется для синтеза \emph{пассивных фильтров}~--- электронных фильтров, состоящих только из пассивных компонент, таких как, к примеру, конденсаторы и резисторы. Их особенностью является то, что они не требуют никакого источника энергии для своего функционирования. Кроме того, в отличие от активных в пассивных фильтрах не происходит усиления сигнала по мощности, и они почти всегда являются линейными.\br
+
+Формализуем поставленную задачу\br
+
+Рассматривается афинная по управлению система
+
+\begin{equation}
+\label{eq:5/1}
+\left\{ \begin{array}{l}
+\dot{x} = f(x) + g(x)u\mbox{,} \\
+y = h(x)\mbox{.}
+\end{array} \right.
+\end{equation}
+
+где $x = x(t) \in \Rv{n}$, $u = u(t) \in \Rv{m}$, $y = y(t) \in \Rv{l}$~--- векторы входа, управления и выхода соответсвенно. $f(x)$ и $h(x)$~--- гладкие вектор-функции, а $g(x)$~--- гладкая матрица-функция.
+
+Пусть $G \in \Rv{m\times n}$
+
+\begin{df}
+\label{df:5/1}
+
+Система \vref{eq:5/1} называется $G$-пассивной, если существует такая неотрицательная скалярная функция запаса $V(x)$, что
+
+\begin{equation}
+\label{eq:5/2}
+V(x) \leqslant V(x_0) + \int\limits_0^t u^T(t)Gy(t)\,dt
+\end{equation}
+
+
+для любого решения $x(t)$ системы \ref{eq:5/1}, что $x_0 \eqdef x(0)$, $x=x(t)$.
+\end{df}
+
+\begin{df}
+\label{df:5/2}
+
+Система \vref{eq:5/1} называется строго $G$-пассивной, если существуют такие скалярные функции $V(x) \geqslant 0$ и $\mu(x) > 0$, что
+
+\begin{equation}
+\label{eq:5/3}
+V(x) \leqslant V(x_0) + \int\limits_0^t \big( u^T(s)Gy(s) - \mu(x(s)) \big)\,ds\mbox{.}
+\end{equation}
+
+\end{df}
+
+
+
+\section[Постановка задачи в случае адаптивных систем]{Постановка задачи пассификации в случае адаптивных систем}
+
+Положим, что динамическая система описывается следующей линейной системой со случайными величинами:
+
+\begin{equation}
+\label{eq:5/4}
+\left\{ \begin{array}{l}
+\dot{x}(t) = Ax(t) + Bu(t) + \sum\limits_{i=1}^N \delta_i(t)[A_ix(t) + B_iu(t)]\mbox{,} \\
+y(t) = Cx(t)\mbox{,}
+\end{array} \right.
+\end{equation}
+
+где $x \in \Rv{n}$~--- вектор состояний динамической системы; $u \in \Rv{m}$~--- вектор управлений; $y \in \Rv{p}$~--- вектор выхода системы. Матрицы $A$, $B$, $C$, $A_i$, $B_i$ ($i \in \{ 1,2, \ldots, N \}$)~--- постоянные матрицы соответствующих размерностей, причем $C$ имеет полный строчный ранг. $\delta_i(t)$ ($i \in \{ 1,2, \ldots, N \}$) есть компоненты случайного $\delta(t) = \big(\delta_1(t), \delta_2(t), \ldots, \delta_n(t)\big)^T$, удовлетворяющие условиям
+
+\begin{equation}
+\label{eq:5/5}
+\underline{\delta}_i \leqslant \delta_i(t) \leqslant \overline{\delta}_i{,}~~~~i \in \{ 1,2, \ldots, N \}\mbox{.}
+\end{equation}
+
+Определим множество $\Delta$ таким, что
+
+\begin{equation}
+\label{eq:5/6}
+\Delta \eqdef \big\{ \delta(t)~|~ \delta_i \in [ \underline{\delta}_i ,\overline{\delta}_i ]{,}~~i \in \{ 1,2, \ldots, N \} \big\}\mbox{;}
+\end{equation}
+
+множество граней $\Delta_0$ определим как
+
+\begin{equation}
+\label{eq:5/7}
+\Delta_0 \eqdef \big\{ \delta(t)~|~ \delta_i \in \{ \underline{\delta}_i ,\overline{\delta}_i \}{,}~~i \in \{ 1,2, \ldots, N \} \big\}\mbox{.}
+\end{equation}
+
+Задача заключается в нахождении пары матриц $(F,G)$ таких, что система \vref{eq:5/4} с контрольным выходом $\omega$ и обратной связью по состоянию
+
+\begin{equation}
+\label{eq:5/8}
+u = \omega - Fy
+\end{equation}
+
+была бы асимптотически устойчива и строго $G$-пассивна относительно $\omega$ и вектора наблюдений
+
+\begin{equation}
+\label{eq:5/9}
+z \eqdef Gy
+\end{equation}
+
+для всех параметрических случайных величин, удовлетворяющих \ref{eq:5/5}.\br
+
+Положим $V(x) \eqdef \frac{1}{2}x^THx$, $H\colon~H = H^T > 0$. Пусть $\mu(x) \eqdef \frac{1}{2}x^TMx$, $M\colon~M = M^T > 0$. Перепишем определение \vref{df:5/2} в дифференциальной форме с учетом \ref{eq:5/8} и \ref{eq:5/9}:
+
+\begin{eqnarray}
+\label{eq:5/10}
+\frac{\partial V}{\partial x}\big[\big( A(\delta) + B(\delta)FC\big)x + B(\delta)\omega \big] \leqslant \nonumber \\
+\omega^TGy - \frac{1}{2}x^TMx\mbox{,} \\
+\delta \in \Delta{.} \nonumber
+\end{eqnarray}
+
+или в форме соответствующего матричного неравенства\cite{PF}:
+
+\begin{equation}
+\label{eq:5/11}
+\left( \begin{array}{cc}
+A_c^T(\delta)H + HA_c(\delta) + M    &    HB(\delta) - (GC)^T \\
+B^T(\delta)H - GC                    &    0
+\end{array} \right) \leqslant 0\mbox{,}
+\end{equation}
+
+где $A_c(\delta) \eqdef A(\delta) - B(\delta)FC$, $\delta \in \Delta$.
+
+
+
+% ------------------------------------------------------------------------------------------
+
+
+\section{Метод решения задачи пассификации}
+
+Приведем теорему, из которой непосредственно будет следовать метод решения задачи, основанный на приведении априорных данных к условиям ее реализуемости.
+
+\begin{teo}
+\label{teo:5/1}
+Матрица усиления $F$ такая, что система \ref{eq:5/4}--\vref{eq:5/8} будет экспоненциально устойчивой для всех $\delta \in \Delta$, существует тогда и только тогда, когда найдутся матрицы параметров $Q\colon~Q = Q^T \geqslant 0$, $R\colon~R=R^T>0$ такие, что
+
+\begin{equation}
+\label{eq:5/12}
+FC = R^{-1}[B^T(\delta)P + L(\delta)]\mbox{,}~~~\delta \in \Delta_0\mbox{,}
+\end{equation}
+
+где $P\colon~P = P^T>0$ и $L(\delta)$ есть решения матричного неравенства
+
+\begin{eqnarray}
+\label{eq:5/13}
+A^T(\delta)P + PA(\delta) - PB(\delta)R^{-1}B^T(\delta)P + \nonumber \\
+Q + L^T(\delta)R^{-1}L(\delta) < 0\mbox{,} \\
+\delta \in \Delta\mbox{.} \nonumber
+\end{eqnarray}
+\end{teo}
+
+Доказательство теоремы, в сущности, повторяет доказательство теоремы \vref{eq:3/1} с незначительными поправками.\br
+
+Основываясь на этом результате, можно привести алгоритм решения поставленной задачи.
+
+\pagebreak
+\begin{alg}
+\label{alg:5/1}
+Метод решения задачи пассификации.
+
+\begin{enumerate}
+\item Положим матрицы $Q\colon~Q \geqslant 0$, $R\colon~R>0$, $W\colon~W>0$, основываясь на LQR-предположениях, и решим следующую систему линейных матричных неравенств и уравнений относительно $X$, $Y(\delta)$, $M$ и $K$:
+
+\begin{eqnarray}
+\label{eq:5/14}
+\left\{ \begin{array}{l}
+    \left( \begin{array}{ccc}
+        XA^T(\delta) + A(\delta)X - B^T(\delta)R^{-1}B(\delta)   &   X\sqrt{Q}   &   Y^T(\delta) \\
+        \sqrt{Q}X    &    -E    &    0 \\
+        Y(\delta)    &    0     &   -E
+    \end{array} \right) < 0\mbox{,} \\
+    CX = MC\mbox{,} \\
+    K \eqdef R^{-1}(B^T(\delta) + Y(\delta))\mbox{,} \nonumber \\
+    \big( B^T(\delta) + Y(\delta) \big)\big( E - C^+C \big) = 0\mbox{;}
+\end{array} \right. \\
+\delta \in \Delta_0\mbox{.} \nonumber \\
+\end{eqnarray}
+
+\item Если \vref{eq:5/14} разрешима, то вычислим матрицу усиления обратной связи по состоянию по следующей формуле:
+
+\begin{equation}
+\label{eq:5/15}
+F = \big[ R^{-1}\big( B^T(\delta) + Y(\delta) \big)C^+ + Z\big(E + C^+C  \big) \big]M^{-1}
+\end{equation}
+
+для произвольных матрицы параметров $Z$ и $\delta \in \Delta$.
+
+\item Решим следующее матричное неравенство относительно $G$ и $H\colon~H=H^T>0$:
+
+\begin{eqnarray}
+\label{eq:5/15}
+\left[ \begin{array}{cc}
+A_c^T(\delta)H + HA_c(\delta) + W   &   HB(\delta) - (GC)^T \\
+B^T(\delta)H - GC   &   0
+\end{array} \right] \leqslant 0\mbox{,} \\
+\delta \in \Delta\mbox{,} \nonumber
+\end{eqnarray}
+
+где $A_c(\delta) \eqdef A(\delta) - B(\delta)FC$. Из решения, таким образом, найдем матрицу $G$, которая обеспечивает $G$-пассивный выход.
+
+\end{enumerate}
+\end{alg}

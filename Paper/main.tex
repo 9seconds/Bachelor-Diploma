@@ -1,0 +1,88 @@
+% coding: utf-8
+% --------------------------------------------------------------------------------------------------
+% "Параметризация стабилизирующих управлений в стохастических системах с непрерывным временем", 2009
+% : ядро
+% --------------------------------------------------------------------------------------------------
+\documentclass[12pt, a4paper, titlepage, openbib, oneside]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+%\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{theorem}
+\usepackage[russian]{varioref}
+\usepackage[pdftex]{graphicx}
+\usepackage{listings}
+
+\frenchspacing
+\fussy
+\raggedbottom
+
+\setlength{\leftmargin}{20mm}
+\setlength{\rightmargin}{10mm}
+\righthyphenmin=2
+\emergencystretch=6pt
+
+
+\newtheorem{teo}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem{alg}{Алгоритм}
+\newtheorem{df}{Определение}
+
+
+
+\DeclareMathOperator{\diag}{\mathrm{diag}}
+
+
+
+
+
+%\includeonly{abstract,toc,ch1,ch2,ch3,ch4,ch5,ch6,ch7,biblist}
+\begin{document}
+
+\renewcommand{\bibname}{Список использованной литературы}
+\renewcommand{\chaptername}{Раздел}
+
+
+\newcommand{\br}{\vspace{12pt}}
+\newcommand{\eqdef}{\stackrel{\mathrm{def}}{=}}
+\newcommand{\Rv}[1]{\mathbb{R}^{#1}}
+\newcommand{\Rs}[2]{\mathbb{R}^{{#1} \times {#2}}}
+\newcommand{\qed}{\vspace{12pt}\hfill \mbox{\raggedright \rule{.1in}{.1in}}}
+
+
+
+\include{titlepage}
+\include{abstract} % +++
+\include{toc} % +++
+
+% chapter 1: введение
+\include{ch1} % +++
+
+% chapter 2: обзор задач
+\include{ch2} % +++
+
+% chapter 3: некоторые алгоритмы решения задачи
+\include{ch3} % +++
+
+% chapter 4: линейные системы с марковскими переключениями
+\include{ch4} % +++
+
+% chapter 5: алгоритмы решения задач
+\include{ch5} % +++
+
+% chapter 6: связь с проблемами наблюдаемости
+\include{ch6} % +++
+
+% chapter 7: практическая часть
+\include{ch7}
+
+% chapter 8: заключение
+\include{ch8}
+
+\include{biblist} % +++
+
+\include{appendix}
+
+\end{document}
